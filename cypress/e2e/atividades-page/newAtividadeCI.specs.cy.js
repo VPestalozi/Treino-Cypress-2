@@ -13,13 +13,12 @@ describe('Usuario deve cnseguir criar e examinar uma atividade', () => {
     });
     
     it('Cria uma atividade do tipo Check-In sem notificação',function () {
-        let notifica = 'Não';
         cy.login(this.dadosLogin.email, this.dadosLogin.password);
         cy.newAtividadeCheckIn(
             this.dadosCheckIn.consultorNewAtivCI,
             this.dadosCheckIn.clienteNewAtivCI,
             this.dadosCheckIn.empresaNewAtivCI,
-            notifica
+            this.dadosCheckIn.semNotificacao
         );
     });
 });

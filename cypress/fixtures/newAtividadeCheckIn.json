@@ -1,5 +1,7 @@
 {
     "consultorNewAtivCI": "FABIANO FERNANDES",
     "clienteNewAtivCI": "A2W Tecnologia",
-    "empresaNewAtivCI": "DIPAGRO SNP"
+    "empresaNewAtivCI": "DIPAGRO SNP",
+    "comNotificacao": "Sim",
+    "semNotificacao": "Não"
 }
