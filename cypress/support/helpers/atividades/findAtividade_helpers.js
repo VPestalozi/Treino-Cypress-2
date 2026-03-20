@@ -8,5 +8,5 @@ export const exibirAtivCIHelper = (idAtividades,clienteAtivCI,consultorAtivCI) =
     cy.contains('p','Check-in').should('have.text','Check-in');
     cy.contains('p',`${clienteAtivCI}`).should('have.text',`${clienteAtivCI}`);
     cy.contains('p',`${consultorAtivCI}`).should('have.text',`${consultorAtivCI}`);
-    cy.contains('span','CONCLUÍDO').should('have.text','CONCLUÍDO');
+    cy.contains('span','CONCLUÍDO').should('have.text',' CONCLUÍDO ');
 }
