@@ -7,5 +7,10 @@ export const a2wWebLogin = () => {
 
 export const a2wWebNewAtividade = () => {
     cy.visit(urls.novaAtividade);
-    cy.contains('div','Novo').should('have.text','Novo');
+    cy.contains('div','Dados Gerais').should('have.text','Dados Gerais');
+}
+
+export const a2wWebExibirAtividade = () => {
+    cy.visit(urls.exibirAtividade);
+    cy.contains('span',' Atividades ').should('have.text',' Atividades ');
 }
