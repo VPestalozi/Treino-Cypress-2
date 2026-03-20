@@ -1,4 +1,4 @@
-import { elementosNewAtiv } from "../../elements";
+import { elementosNewAtiv } from "../../elements/elementsAtiv";
 import { a2wWebNewAtividade } from "../visit/visit_helpers";
 
 export const newAtividadeCIHelper = (consultorNewAtivCI,clienteNewAtivCI,empresaNewAtivCI,notifica) => {
