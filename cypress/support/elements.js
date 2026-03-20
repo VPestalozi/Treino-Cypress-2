@@ -5,3 +5,11 @@ export const elementosNewAtiv = {
     barraEmpresaAtiv: '[formcontrolname="empresaAux"]',
     botaoAddNewAtiv: '[data-test-id="nova-atividade-botao-adicionar"]'
 };
+
+export const elementosFiltroAtiv = {
+    botaoDoFiltro: '[data-test-id="btn-filtros"]',
+    campoID: '[formcontrolname="IdAtividade"]',
+    seletorTipoDeAtiv: '[formcontrolname="tipoAtividadeAux"]',
+    campoCliente: '[formcontrolname="parceiroAux"]',
+    campoConsultor: '[formcontrolname="vendedorAux"]'
+};
