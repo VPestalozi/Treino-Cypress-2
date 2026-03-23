@@ -11,7 +11,7 @@ export const newAtividadeCIHelper = (consultorNewAtivCI,clienteNewAtivCI,empresa
     cy.contains('span', `${consultorNewAtivCI}`).click();
     cy.get(elementosNewAtiv.barraClienteAtiv).type(clienteNewAtivCI);
     cy.contains('span', `${clienteNewAtivCI}`).click();
-    cy.get(elementosNewAtiv.barraEmpresaAtiv).click().clear().type(empresaNewAtivCI);
+    cy.get(elementosNewAtiv.barraEmpresaAtiv).click().clear().should('have.value','').type(empresaNewAtivCI);
     cy.contains('span', `${empresaNewAtivCI}`).click();
     cy.get(elementosNewAtiv.botaoAddNewAtiv).click();
     cy.wait('@newAtivCheckIn').then((interception) => {

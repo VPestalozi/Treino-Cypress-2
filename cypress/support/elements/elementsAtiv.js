@@ -13,3 +13,4 @@ export const elementosFiltroAtiv = {
     campoCliente: '[formcontrolname="parceiroAux"]',
     campoConsultor: '[formcontrolname="vendedorAux"]'
 };
+

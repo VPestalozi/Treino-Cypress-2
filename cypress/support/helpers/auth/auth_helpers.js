@@ -11,3 +11,11 @@ export const loginHelper = (email, password) => {
     });
     cy.contains('span','PLATAFORMA').should('have.text','PLATAFORMA');
 }
+
+export const logoutHelper = (username) => {
+    const regex = new RegExp(`^${username}`)
+    cy.contains('span', regex).click();
+    cy.contains('span', 'Meu Perfil').should('have.text', 'Meu Perfil');
+    cy.contains('span','Sair').click();
+    cy.contains('div','FAÇA LOGIN PARA ACESSAR').should('have.text','FAÇA LOGIN PARA ACESSAR');
+}

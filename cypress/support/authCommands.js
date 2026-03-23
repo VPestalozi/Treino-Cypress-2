@@ -24,8 +24,13 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import { loginHelper } from "./helpers/auth/login_helpers"
+import { loginHelper } from "./helpers/auth/auth_helpers";
+import { logoutHelper } from "./helpers/auth/auth_helpers";
 
 Cypress.Commands.add('login', (email,password) => {
     loginHelper(email,password);
+})
+
+Cypress.Commands.add('logout', (username)=> {
+    logoutHelper(username);
 })

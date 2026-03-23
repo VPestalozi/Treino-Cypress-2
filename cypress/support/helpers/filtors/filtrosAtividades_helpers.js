@@ -16,11 +16,11 @@ export const limparFiltroAtiv = () => {
 
 export const filtroAtividadeCI = (idAtividade,clienteExibAtivCI,consultorExibAtivCI) => {
     limparFiltroAtiv();
+    cy.intercept('GET', '/api/v1/Atividades/GetAtividadePaginacao*').as('esperarPaginacao')
     cy.intercept('POST', '/api/v1/user/salvar-filtro').as('filtroExibAtiv');
-    cy.get(elementosFiltroAtiv.botaoDoFiltro).click();
+    cy.get(elementosFiltroAtiv.seletorTipoDeAtiv).click();
     cy.contains('span','Check-in').click();
     if(idAtividade){
-        //cy.contains('mat-label','Id').closest('div').find('input').clear().type(`${idAtividade}`);
         cy.get(elementosFiltroAtiv.campoID).clear().type(`${idAtividade}`);
     }
     if(clienteExibAtivCI){
@@ -31,6 +31,9 @@ export const filtroAtividadeCI = (idAtividade,clienteExibAtivCI,consultorExibAti
     }
     cy.contains('span','FILTRAR').click();
     cy.wait('@filtroExibAtiv').then((interception) =>{
+        expect(interception.response.statusCode).to.eq(200);
+    });
+    cy.wait('@esperarPaginacao').then((interception) => {
         expect(interception.response.statusCode).to.eq(200);
     });
 }
