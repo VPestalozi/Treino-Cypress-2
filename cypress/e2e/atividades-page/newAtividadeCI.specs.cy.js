@@ -22,6 +22,10 @@ describe('Usuario deve cnseguir criar e examinar uma atividade', () => {
         cy.login(dados.email, dados.password);
     })
 
+    afterEach(function() {
+        cy.logout(dados.username);
+    })
+
     it('Cria uma atividade do tipo Check-In sem notificação',function () {
         cy.newAtividadeCheckIn(
             dadosCI.consultorNewAtivCI,
