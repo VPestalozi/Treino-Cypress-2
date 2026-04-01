@@ -1,10 +1,20 @@
-import { exibirAtivCIHelper } from "./helpers/atividades/findAtividade_helpers";
-import { newAtividadeCIHelper } from "./helpers/atividades/newAtividades_helpers"
+import { filtroAtivCheckIn, limparFiltroAtiv } from "./helpers/filtors/filtrosAtividades_helpers";
+import { newAtividadeCheckInHelper } from "./helpers/atividades/newAtividades_helpers"
+import { searchBarAtivHelperID } from "./helpers/atividades/searchBarAtividade_helpers";
 
-Cypress.Commands.add('newAtividadeCheckIn', (consultorNewAtivCI,clienteNewAtivCI,empresaNewAtivCI,notifica) =>{
-    newAtividadeCIHelper(consultorNewAtivCI,clienteNewAtivCI,empresaNewAtivCI,notifica);
+
+Cypress.Commands.add('newAtividadeCheckIn', (consultorNewAtivCheckIn,clienteNewAtivCheckIn,empresaNewAtivCheckIn,notifica) =>{
+    newAtividadeCheckInHelper(consultorNewAtivCheckIn,clienteNewAtivCheckIn,empresaNewAtivCheckIn,notifica);
 })
 
-Cypress.Commands.add('exibAtivCheckIn',(idExibAtivCI, clienteExibAtivCI, consultorExibAtivCI)=> {
-    exibirAtivCIHelper(idExibAtivCI,clienteExibAtivCI,consultorExibAtivCI);
+Cypress.Commands.add('filtroExibAtivCheckIn',(idExibAtivCheckIn, clienteExibAtivCheckIn, consultorExibAtivCheckIn)=> {
+    filtroAtivCheckIn(idExibAtivCheckIn,clienteExibAtivCheckIn,consultorExibAtivCheckIn);
+})
+
+Cypress.Commands.add('searchBarID', (pesquisaID) =>{
+    searchBarAtivHelperID(pesquisaID);
+})
+
+Cypress.Commands.add('limparFiltro', () =>{
+    limparFiltroAtiv();
 })

@@ -1,21 +1,44 @@
+import { elementosHomePage } from "../../elements/elementsHomePage";
+import { elementosLogin } from "../../elements/elementsLogin";
 import { a2wWebLogin } from "../visit/visit_helpers";
 
 export const loginHelper = (email, password) => {
-    a2wWebLogin();
-    cy.intercept('POST', '/api/v1/user/login').as('loginRequest');
-    cy.contains('mat-label','E-mail').closest('div').find('input').type(email);
-    cy.contains('mat-label','Senha').closest('div').find('input').type(password);
-    cy.contains('button', 'ENTRAR').click();
-    cy.wait('@loginRequest').then((interception) => {
-        expect(interception.response.statusCode).to.eq(200);
+    
+    // O cy.session vai salvar o estado do login baseado no nome do usuário
+    cy.session(email, () => {
+        // Visitando a pagina de login inicial
+        a2wWebLogin();
+
+        // Interceptador para validar a rota de login
+        cy.intercept('POST', '/api/v1/user/login').as('loginRequest');
+
+        // Digitando o email e password
+        cy.get(elementosLogin.barraDeEmail).type(email);
+        cy.get(elementosLogin.barraDeSenha).type(password);
+
+        // Clicando em entrar
+        cy.contains('button', 'ENTRAR').click();
+
+        // Validando a rota de login
+        cy.wait('@loginRequest', {timeout: 10000}).then((interception) => {
+            expect(interception.response.statusCode).to.eq(200);
+        });
+
+        // validando a pagina
+        cy.get(elementosHomePage.formularioPgInicial).should('be.visible');
     });
-    cy.contains('span','PLATAFORMA').should('have.text','PLATAFORMA');
 }
 
 export const logoutHelper = (username) => {
-    const regex = new RegExp(`^${username}`)
+
+    // Regex para garantir que o texto do username
+    const regex = new RegExp(`^${username}`);
+
+    // Etapas para realizar o logout
     cy.contains('span', regex).should('be.visible').click();
     cy.contains('span', 'Meu Perfil').should('have.text', 'Meu Perfil');
-    cy.contains('span','Sair').click();
-    cy.contains('div','FAÇA LOGIN PARA ACESSAR').should('have.text','FAÇA LOGIN PARA ACESSAR');
+    cy.contains('span', 'Sair').click();
+
+    // Validando que retornou para a pagina inicial
+    cy.url().should('include', '/auth/login-2');
 }

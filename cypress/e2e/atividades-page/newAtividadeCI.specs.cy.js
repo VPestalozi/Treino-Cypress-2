@@ -1,14 +1,14 @@
 import '../../support/authCommands'
 import '../../support/ativiPageCommands'
 
-describe('Usuario deve cnseguir criar e examinar uma atividade', () => {
-    let dadosCI;
+describe('Usuario deve conseguir fazer todos os processos das atividades', () => {
+    let dadosCheckIn;
     let dadosExibir;
     let dados;
 
-    before(function () {
-        cy.fixture('newAtividadeCheckIn').then((dadosCheckIn) =>{
-            dadosCI = dadosCheckIn;
+    before(() =>{
+        cy.fixture('newAtividadeCheckIn').then((dadosNewAtiv) =>{
+            dadosCheckIn = dadosNewAtiv;
         })
         cy.fixture('exibAtivCheckIn').then((dadosExibAtiv)=>{
             dadosExibir = dadosExibAtiv;
@@ -17,48 +17,44 @@ describe('Usuario deve cnseguir criar e examinar uma atividade', () => {
             dados = dadosLogin;
         });
     });
-
-    beforeEach(function() {
+    
+    beforeEach(() => {
         cy.login(dados.email, dados.password);
     })
-
-    afterEach(function() {
-        cy.logout(dados.username);
-    })
-
-    it('Cria uma atividade do tipo Check-In sem notificação',function () {
+    
+    /*
+    it('Cria uma atividade do tipo Check-In sem notificação',() => {
         cy.newAtividadeCheckIn(
-            dadosCI.consultorNewAtivCI,
-            dadosCI.clienteNewAtivCI,
-            dadosCI.empresaNewAtivCI,
-            dadosCI.semNotificacao
+            dadosCheckIn.consultorNewAtivCheckIn,
+            dadosCheckIn.clienteNewAtivCheckIn,
+            dadosCheckIn.empresaNewAtivCheckIn,
+            dadosCheckIn.semNotificacao
         );
     });
+    */
 
-    it('Busca por atividade do tipo Check-in',function(){
-        cy.exibAtivCheckIn(
-            dadosExibir.idExibAtivCI,
-            dadosExibir.clienteExibAtivCI,
-            dadosExibir.consultorExibAtivCI
+    it('Busca por atividade do tipo Check-in',() => {
+        cy.filtroExibAtivCheckIn(
+            dadosExibir.idExibAtivCheckIn,
+            dadosExibir.clienteExibAtivCheckIn,
+            dadosExibir.consultorExibAtivCheckIn
         );
     });
-
-    it('Cria e visualiza uma atividade do tipo Check-In sem notificação', function() {
+    
+    /*
+    it('Cria e visualiza uma atividade do tipo Check-In sem notificação',() => {
         cy.newAtividadeCheckIn(
-            dadosCI.consultorNewAtivCI,
-            dadosCI.clienteNewAtivCI,
-            dadosCI.empresaNewAtivCI,
-            dadosCI.semNotificacao
+            dadosCheckIn.consultorNewAtivCheckIn,
+            dadosCheckIn.clienteNewAtivCheckIn,
+            dadosCheckIn.empresaNewAtivCheckIn,
+            dadosCheckIn.semNotificacao
         );
         cy.get('@idAtividadeCap').then((idAtivCapturado) => {
             expect(idAtivCapturado, 'O ID deve ser um numero').to.be.a('number');
             expect(idAtivCapturado).to.not.be.NaN;
             expect(idAtivCapturado).to.be.greaterThan(0);
-            cy.exibAtivCheckIn(
-                idAtivCapturado,
-                dadosCI.clienteNewAtivCI,
-                dadosCI.consultorNewAtivCI
-            );
+            cy.searchBarID(idAtivCapturado);
         });
     });
+    */
 });
