@@ -27,16 +27,16 @@ export const limparFiltroAtiv = () => {
     cy.wait('@filtroExibAtivLimpar').then((interception) => {
         expect(interception.response.statusCode).to.eq(200);
     });
-
-    // Garantindo que a aba do filtro esta aberta
-    cy.get(elementosFiltroAtiv.botaoDoFiltro).click();
-    cy.contains('span', 'OPÇÕES DE FILTROS').should('have.text', 'OPÇÕES DE FILTROS');
 }
 
 export const filtroAtivCheckIn = (idAtividade, clienteExibAtivCheckIn, consultorExibAtivCheckIn) => {
 
     // Realizando a limpeza do filtro
     limparFiltroAtiv();
+
+    // Abrindo a aba do filtro
+    cy.get(elementosFiltroAtiv.botaoDoFiltro).click();
+    cy.contains('span', 'OPÇÕES DE FILTROS').should('have.text', 'OPÇÕES DE FILTROS');
 
     // interceptando rotas
     cy.intercept('POST', '/api/v1/Atividades/PostAtividadePaginacao*').as('esperarPaginacao');
@@ -78,12 +78,14 @@ export const filtroAtivCheckIn = (idAtividade, clienteExibAtivCheckIn, consultor
             expect(interception.response.statusCode).to.eq(200);
             const lista = interception.response.body.list;
             const atividade = lista.find(item => item.idAtividade === idAtividade);
-
+            
+            // Mandando uma mensagem no console das ocorrencias da rota de paginação
             console.log('Dados da API CORRETA (última ocorrência):', lista);
 
             // Validações finais
             expect(atividade, 'Atividade deve existir no JSON').to.not.be.undefined;
 
+            // Condições para validar o id, cliente e consultor caso forem passados
             if (idAtividade) {
                 expect(atividade.idAtividade).to.equal(idAtividade);
             }
@@ -94,6 +96,7 @@ export const filtroAtivCheckIn = (idAtividade, clienteExibAtivCheckIn, consultor
                 expect(atividade.nmVendedor).to.equal(consultorExibAtivCheckIn);
             }
 
+            // Validando os status da atividade check-in
             expect(atividade.idStatus).to.equal(3);
         } catch (error) {
             // Se não houver segunda ocorrência, ignora e continua (não falha o teste)

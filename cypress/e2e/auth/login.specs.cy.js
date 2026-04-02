@@ -2,7 +2,7 @@ import '../../support/authCommands'
 
 describe('Usuario deve fazer a etapa de autentificação com sucesso', () => {
     let dados;
-    
+
     beforeEach(() => {
         cy.fixture('authLogin').then((dadosLogin) =>{
             dados = dadosLogin;

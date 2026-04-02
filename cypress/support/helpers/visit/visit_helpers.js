@@ -13,14 +13,17 @@ export const a2wWebLogin = () => {
 // Comando e validação para acessar a pagina de 'Nova Atividade'
 export const a2wWebNewAtividade = () => {
 
+    // intercepta a Rota que completa automaticamente o campo empresas antes de fazer qualquer modificação no formulario
     cy.intercept('GET', '**/api/v1/VinculoTipoAtividadeGrupoEmpresa/SelecionarPorGrupoEmpresa/*').as('esperarEmpresa');
 
     cy.visit(urls.novaAtividade);
 
+    // Valida a rota
     cy.wait('@esperarEmpresa', { timeout: 10000 }).then((interception) => {
         expect(interception.response.statusCode).to.eq(200);
     });
 
+    // Valida se o cypress se encontra na pagina correta
     cy.get(elementosNewAtiv.formularioNewAtiv).should('be.visible');
 }
 

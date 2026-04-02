@@ -3,6 +3,7 @@ import { limparFiltroAtiv } from "../filtors/filtrosAtividades_helpers";
 
 export const searchBarAtivHelperID = (idPesquisa) => {
 
+    // Limpando o Filtro
     limparFiltroAtiv();
 
     // Intercepta a rota da barra de pesquisa

@@ -31,17 +31,24 @@ export const newAtividadeCheckInHelper = (consultorNewAtivCheckIn,clienteNewAtiv
     // Validando a rota e capturando o id da atividade criada
     cy.wait('@newAtivCheckIn', { timeout: 40000 }).then((interception) => {
 
+        // Validando se a rota esta retornando 200OK
         expect(interception.response.statusCode).to.eq(200);
 
+        // Capturando o id da atividade criada
         const idAtiv = interception.response.body.idAtividade;
+
+        // Validando se o id e valido
         const numero = (idAtiv != "" && idAtiv !== null) ? Number(idAtiv) : NaN;
+
 
         expect(numero, `ID Capturado ${idAtiv}`).to.be.a('number');
         expect(numero).to.not.be.NaN;
         expect(numero).to.be.greaterThan(0);
 
+        // Exportando o Id para poder ser usado em outros testes
         cy.wrap(idAtiv).as('idAtividadeCap');
 
+        // Log para aparecer o ID no Cypress
         cy.log(`ID validado: ${numero}`);
     });
 
