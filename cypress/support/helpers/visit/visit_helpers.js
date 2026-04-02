@@ -13,14 +13,20 @@ export const a2wWebLogin = () => {
 // Comando e validação para acessar a pagina de 'Nova Atividade'
 export const a2wWebNewAtividade = () => {
 
+    cy.intercept('GET', '**/api/v1/VinculoTipoAtividadeGrupoEmpresa/SelecionarPorGrupoEmpresa/*').as('esperarEmpresa');
+
     cy.visit(urls.novaAtividade);
+
+    cy.wait('@esperarEmpresa', { timeout: 10000 }).then((interception) => {
+        expect(interception.response.statusCode).to.eq(200);
+    });
 
     cy.get(elementosNewAtiv.formularioNewAtiv).should('be.visible');
 }
 
 // Comando e validação para acessar a pagina de 'Exibir Atividade'
 export const a2wWebExibirAtividade = () => {
-    
+
     cy.visit(urls.exibirAtividade);
 
     cy.get(elementosExibirAtiv.formularioExibAtiv).should('be.visible');

@@ -8,11 +8,10 @@ export const newAtividadeCheckInHelper = (consultorNewAtivCheckIn,clienteNewAtiv
     // Criando os intercepts para as rotas a serem validadas
     cy.intercept('POST', '/api/v1/Atividades').as('newAtivCheckIn');
     cy.intercept('POST', '/api/v1/Notificacoes').as('newAtivCheckInNotifi');
-    cy.intercept('GET', '/api/v1/VinculoTipoAtividadeGrupoEmpresa/SelecionarPorGrupoEmpresa/1').as('esperarEmpresa');
     
     // Adicionando tipo de atividade no formulario
     cy.get(elementosNewAtiv.barraDeTipoAtiv).click();
-    cy.contains('span', 'Check-in').click();
+    cy.contains('span', 'Check-in 1 teste').click();
 
     // Adicionando consultor no formulario
     cy.get(elementosNewAtiv.barraConsultorAtiv).type(consultorNewAtivCheckIn);
@@ -22,11 +21,6 @@ export const newAtividadeCheckInHelper = (consultorNewAtivCheckIn,clienteNewAtiv
     cy.get(elementosNewAtiv.barraClienteAtiv).type(clienteNewAtivCheckIn);
     cy.contains('span', `${clienteNewAtivCheckIn}`).click();
 
-    // Esperando aparecer a empresa no formulario para apagar
-    cy.wait('@esperarEmpresa', {timeout: 10000}).then((interception) => {
-        expect(interception.response.statusCode).to.eq(200);
-    });
-
     // Adicionando a empresa vinculada ao consultor no formulario
     cy.get(elementosNewAtiv.barraEmpresaAtiv).clear().should('have.value','').type(empresaNewAtivCheckIn);
     cy.contains('span', `${empresaNewAtivCheckIn}`).should('be.visible').click();
@@ -35,7 +29,7 @@ export const newAtividadeCheckInHelper = (consultorNewAtivCheckIn,clienteNewAtiv
     cy.get(elementosNewAtiv.botaoAddNewAtiv).click();
 
     // Validando a rota e capturando o id da atividade criada
-    cy.wait('@newAtivCheckIn').then((interception) => {
+    cy.wait('@newAtivCheckIn', { timeout: 40000 }).then((interception) => {
 
         expect(interception.response.statusCode).to.eq(200);
 

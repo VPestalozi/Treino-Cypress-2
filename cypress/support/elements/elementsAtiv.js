@@ -11,7 +11,7 @@ export const elementosNewAtiv = {
 // Elementos na aba de filtors de atividades
 export const elementosFiltroAtiv = {
     botaoDoFiltro: '[data-test-id="btn-filtros"]',
-    campoID: '[formcontrolname="IdAtividade"]',
+    campoID: '[formcontrolname="idAtividade"]',
     seletorTipoDeAtiv: '[formcontrolname="tipoAtividadeAux"]',
     campoCliente: '[formcontrolname="parceiroAux"]',
     campoConsultor: '[formcontrolname="vendedorAux"]'

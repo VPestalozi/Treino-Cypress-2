@@ -1,18 +1,9 @@
 import { elementosExibirAtiv } from "../../elements/elementsAtiv";
-import { a2wWebExibirAtividade } from "../visit/visit_helpers";
+import { limparFiltroAtiv } from "../filtors/filtrosAtividades_helpers";
 
 export const searchBarAtivHelperID = (idPesquisa) => {
 
-    // Verifica se o teste esta ou não na pagina desejada 
-    cy.url().then((urlAtual) => {
-        // Se estiver na pagina correta avisa no terminal do cypress
-        if(urlAtual.includes('/a2w/gestor/atividades')){
-            cy.log('Ja estou na página correta. Seguindo os testes....');
-        } else { 
-            cy.log('URL diferente. Indo para a pagina correta...');
-            a2wWebExibirAtividade();
-        }
-    })
+    limparFiltroAtiv();
 
     // Intercepta a rota da barra de pesquisa
     cy.intercept('POST', '/api/v1/ParceiroNegocio/filtrarazao').as('barraPesquisa');

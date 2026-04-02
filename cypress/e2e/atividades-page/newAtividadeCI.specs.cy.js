@@ -21,8 +21,11 @@ describe('Usuario deve conseguir fazer todos os processos das atividades', () =>
     beforeEach(() => {
         cy.login(dados.email, dados.password);
     })
+
+    after(() => {
+        cy.limparFiltro();
+    });
     
-    /*
     it('Cria uma atividade do tipo Check-In sem notificação',() => {
         cy.newAtividadeCheckIn(
             dadosCheckIn.consultorNewAtivCheckIn,
@@ -31,9 +34,8 @@ describe('Usuario deve conseguir fazer todos os processos das atividades', () =>
             dadosCheckIn.semNotificacao
         );
     });
-    */
 
-    it('Busca por atividade do tipo Check-in',() => {
+    it('Busca por atividade do tipo Check-in e limpa o filtro',() => {
         cy.filtroExibAtivCheckIn(
             dadosExibir.idExibAtivCheckIn,
             dadosExibir.clienteExibAtivCheckIn,
@@ -41,7 +43,6 @@ describe('Usuario deve conseguir fazer todos os processos das atividades', () =>
         );
     });
     
-    /*
     it('Cria e visualiza uma atividade do tipo Check-In sem notificação',() => {
         cy.newAtividadeCheckIn(
             dadosCheckIn.consultorNewAtivCheckIn,
@@ -53,8 +54,7 @@ describe('Usuario deve conseguir fazer todos os processos das atividades', () =>
             expect(idAtivCapturado, 'O ID deve ser um numero').to.be.a('number');
             expect(idAtivCapturado).to.not.be.NaN;
             expect(idAtivCapturado).to.be.greaterThan(0);
-            cy.searchBarID(idAtivCapturado);
+            cy.filtroExibAtivCheckIn(idAtivCapturado);
         });
     });
-    */
 });
