@@ -31,7 +31,7 @@ export const loginHelper = (email, password) => {
 
 export const logoutHelper = (username) => {
 
-    // Regex para garantir que o texto do username
+    // Regex para garantir que o texto do username seja igual ao da fixture
     const regex = new RegExp(`^${username}`);
 
     // Etapas para realizar o logout

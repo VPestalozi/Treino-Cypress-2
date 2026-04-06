@@ -40,9 +40,13 @@ export const newAtividadeCheckInHelper = (consultorNewAtivCheckIn,clienteNewAtiv
         // Validando se o id e valido
         const numero = (idAtiv != "" && idAtiv !== null) ? Number(idAtiv) : NaN;
 
-
+        //Garante que e um número (não uma string)
         expect(numero, `ID Capturado ${idAtiv}`).to.be.a('number');
+
+        // Garante que não é NaN
         expect(numero).to.not.be.NaN;
+
+        // Garante que é um ID Positivo
         expect(numero).to.be.greaterThan(0);
 
         // Exportando o Id para poder ser usado em outros testes

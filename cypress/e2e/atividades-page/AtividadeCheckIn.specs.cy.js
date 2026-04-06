@@ -1,7 +1,7 @@
 import '../../support/authCommands'
 import '../../support/ativiPageCommands'
 
-describe('Usuario deve conseguir fazer todos os processos das atividades', () => {
+describe('Fluxo de processos de Check In', () => {
     let dadosCheckIn;
     let dadosExibir;
     let dados;
@@ -26,7 +26,7 @@ describe('Usuario deve conseguir fazer todos os processos das atividades', () =>
         cy.limparFiltro();
     });
     
-    it('Cria uma atividade do tipo Check-In sem notificação',() => {
+    it('Cria uma atividade do tipo Check-In (sem notificação)',() => {
         cy.newAtividadeCheckIn(
             dadosCheckIn.consultorNewAtivCheckIn,
             dadosCheckIn.clienteNewAtivCheckIn,
@@ -35,7 +35,7 @@ describe('Usuario deve conseguir fazer todos os processos das atividades', () =>
         );
     });
 
-    it('Busca por atividade do tipo Check-in e limpa o filtro',() => {
+    it('Busca por atividade do tipo Check-in',() => {
         cy.filtroExibAtivCheckIn(
             dadosExibir.idExibAtivCheckIn,
             dadosExibir.clienteExibAtivCheckIn,
@@ -43,7 +43,7 @@ describe('Usuario deve conseguir fazer todos os processos das atividades', () =>
         );
     });
     
-    it('Cria e visualiza uma atividade do tipo Check-In sem notificação',() => {
+    it('Cria e visualiza uma atividade do tipo Check-In (sem notificação)',() => {
         cy.newAtividadeCheckIn(
             dadosCheckIn.consultorNewAtivCheckIn,
             dadosCheckIn.clienteNewAtivCheckIn,

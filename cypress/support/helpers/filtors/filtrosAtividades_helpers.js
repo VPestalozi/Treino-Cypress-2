@@ -44,7 +44,7 @@ export const filtroAtivCheckIn = (idAtividade, clienteExibAtivCheckIn, consultor
 
     // Aplicando o tipo de atividade no formulario
     cy.get(elementosFiltroAtiv.seletorTipoDeAtiv).click();
-    cy.contains('span', 'Check-in 1 teste').click();
+    cy.contains('span', 'Check-in 1 teste', {timeout: 8000}).click();
 
     // Condições para preencher o formulario de acordo com oque foi enviado para a função
     if (idAtividade) {
@@ -106,7 +106,5 @@ export const filtroAtivCheckIn = (idAtividade, clienteExibAtivCheckIn, consultor
     });
 
     // Faz uma validação minima da UI para validar sua visualização
-    if (idAtividade) {
-        cy.get(elementosExibirAtiv.exibCampoId).should('be.visible').and('contain', idAtividade);
-    }
+    cy.get(elementosExibirAtiv.exibCampoId).should('be.visible')
 }

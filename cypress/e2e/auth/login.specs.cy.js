@@ -1,6 +1,6 @@
 import '../../support/authCommands'
 
-describe('Usuario deve fazer a etapa de autentificação com sucesso', () => {
+describe('Fluxo de autentificação da plataforma', () => {
     let dados;
 
     beforeEach(() => {
